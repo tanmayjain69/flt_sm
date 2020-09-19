@@ -8,7 +8,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  var name,password,token;
+  var name,password,email,firstName,token;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,12 +19,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
           children: <Widget>[
             TextField(
             decoration: InputDecoration(
-              labelText: 'Name'
+              labelText: 'User Name'
             ),
             onChanged: (val){
               name = val;
             },
+            
             ),
+            TextField(
+            decoration: InputDecoration(
+              labelText: 'Email'
+            ),
+            onChanged: (val){
+              email = val;
+            },
+            
+            ),
+            
             TextField(
             obscureText: true,
             decoration: InputDecoration(
@@ -34,12 +45,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
               password = val; 
             } 
             ),
+            TextField(
+            obscureText: true,
+            decoration: InputDecoration(
+              labelText: 'Confirm Password'
+            ),
+            
+            
+            ),
             SizedBox(height: 10.0),
             RaisedButton(
               child: Text('Add User'),
               color:  Colors.green,
               onPressed: (){
-                AuthService().addUser(name, password).then((val){
+                AuthService().addUser(name, password, email).then((val){
                 
                     Fluttertoast.showToast(msg: 
                     val.data['msg'],

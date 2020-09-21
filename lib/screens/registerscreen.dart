@@ -1,6 +1,9 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:fltsm/services/authenticate.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -8,16 +11,21 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  var _formKey = GlobalKey<FormState>(); 
   var name,password,email,firstName,token;
+  
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
-       body: Padding(
+       body: Form( 
+       key: _formKey,
+       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            TextField(
+            TextFormField(
             decoration: InputDecoration(
               labelText: 'User Name'
             ),
@@ -26,17 +34,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
             },
             
             ),
-            TextField(
+            TextFormField(
+            validator: (String value){
+              final bool isValid = EmailValidator.validate(value);
+              if(!isValid){
+                return "Please Enter a valid email";
+              }
+            },
             decoration: InputDecoration(
               labelText: 'Email'
             ),
+
             onChanged: (val){
               email = val;
             },
             
             ),
             
-            TextField(
+            TextFormField(
             obscureText: true,
             decoration: InputDecoration(
               labelText: 'Password'
@@ -45,7 +60,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               password = val; 
             } 
             ),
-            TextField(
+            TextFormField(
             obscureText: true,
             decoration: InputDecoration(
               labelText: 'Confirm Password'
@@ -58,6 +73,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Text('Add User'),
               color:  Colors.green,
               onPressed: (){
+                if (_formKey.currentState.validate()){
                 AuthService().addUser(name, password, email).then((val){
                 
                     Fluttertoast.showToast(msg: 
@@ -70,6 +86,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     );
                   
                 });
+              }
               },
             ),
             SizedBox(height: 10.0),
@@ -82,6 +99,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
           ]
           )
+       )
        )
     );
   }

@@ -1,4 +1,5 @@
 var User = require('../models/user')
+var Profile = require('../models/profile')
 var jwt = require('jwt-simple')
 var config = require('../config/dbConfig')
 
@@ -61,6 +62,34 @@ var functions  = {
         else{
             return res.json({success:false,msg:'No Headers'})
         }
+    },
+
+    addtoProfile : function(req,res){
+        if(req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer'){
+            var token = req.headers.authorization.split(' ')[1]
+            var decodedtoken = jwt.decode(token,config.secret)
+
+            // return res.json({success:true,msg: 'Hello '+ decodedtoken.name})
+            var newUser =  Profile({
+                name: decodedtoken.name,
+                LastName: req.body.LastName,
+                FirstName: req.body.FirstName,
+                Bio: req.body.Bio
+               
+               });
+               newUser.save(function(err,newUser){
+                   if(err){
+                       res.json({success:false,msg:'Failed to save'})
+   
+                   }
+                   else{
+                       res.json({success:true,msg:'Successfully saved'})
+                   }
+               })
+        }
+        else{
+            return res.json({success:false,msg:'No Headers'})
+        } 
     }
     
 }

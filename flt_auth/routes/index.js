@@ -10,5 +10,5 @@ router.get('/',(req,res) => {
 router.post('/adduser',actions.addNew)
 router.post('/authenticate',actions.authenticate)
 router.get('/getinfo',actions.getinfo)
-
+router.post('/addtoProfile',actions.addtoProfile)
 module.exports = router

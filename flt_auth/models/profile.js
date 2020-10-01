@@ -6,8 +6,6 @@ var profileSchema = new Schema({
     name: {
         type:  String,
         require: true,
-        unique: true,
-
     },
     LastName: {
         type: String,
@@ -24,7 +22,9 @@ var profileSchema = new Schema({
     Bio: {
         type: String,
         
-    }
+    },
+
+    
 })
 
 

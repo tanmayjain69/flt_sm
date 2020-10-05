@@ -6,6 +6,7 @@ var profileSchema = new Schema({
     name: {
         type:  String,
         require: true,
+        unique: true
     },
     LastName: {
         type: String,
@@ -22,6 +23,26 @@ var profileSchema = new Schema({
     Bio: {
         type: String,
         
+    },
+    
+    Communities: {
+        type: Array
+    },
+
+    Skills: {
+        typr: Array
+    },
+
+    Followers: {
+        type: Number,
+    },
+
+    Posts: {
+        type: Number,
+    },
+
+    Following: {
+        type: Number
     },
 
     

@@ -107,7 +107,12 @@ var functions  = {
                 name: decodedtoken.name,
                 LastName: req.body.LastName,
                 FirstName: req.body.FirstName,
-                Bio: req.body.Bio
+                Bio: req.body.Bio,
+                Communities: req.body.Communities,
+                Followers: req.body.Followers,
+                Posts: req.body.Posts,
+                Following: req.body.Following,
+                Skills: req.body.Skills
                
                });
                newUser.save(function(err,newUser){
@@ -123,6 +128,33 @@ var functions  = {
         else{
             return res.json({success:false,msg:'No Headers'})
         } 
+    },
+
+    updateProfile : function(req,res){
+        Profile.update({name:req.body.name},{$set:{
+            Communities: req.body.Communities,
+            Bio: req.body.Bio,
+            LastName: req.body.LastName,
+            FirstName: req.body.FirstName,
+            Posts: req.body.Posts,
+            Following: req.body.Following, 
+            Followers: req.body.Followers,
+            Skills: req.body.Skills
+        }}, function(err,result){
+            if(err){
+            res.json({success:false,msg:err})  
+            }
+            else{
+                res.json({success:true,msg:'Successfully updated'})  
+            }
+        });
+    },
+
+    getProfileInfo : function(req,res){
+        Profile.findOne({name: req.body.name},function(err,result){
+            if(err) throw err;
+            res.json({success:true,msg:result}) 
+        })
     }
     
 }

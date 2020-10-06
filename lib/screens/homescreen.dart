@@ -10,7 +10,7 @@ class ScreenArguments {
 
 // A widget that extracts the necessary arguments from the ModalRoute.
 class ExtractArgumentsScreen extends StatelessWidget {
-  static const routeName = '/extractArguments';
+  // static const routeName = '/extractArguments';
 
   @override
   Widget build(BuildContext context) {

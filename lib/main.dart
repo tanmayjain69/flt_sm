@@ -1,3 +1,4 @@
+import 'package:fltsm/screens/HomeScreen/main_home.dart';
 import 'package:fltsm/screens/Welcome/welcome_screen.dart';
 import 'package:fltsm/screens/homescreen.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'SAYYAH',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
     
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
     // When navigating to the "/second" route, build the SecondScreen widget.
       
     //Navigation with extract route
-      ExtractArgumentsScreen.routeName: (context) => ExtractArgumentsScreen(),
+      HomePage.routeName: (context) => HomePage(),
   },
       // home: LoginScreen(),
     );

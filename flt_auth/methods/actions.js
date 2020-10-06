@@ -108,7 +108,6 @@ var functions  = {
                 LastName: req.body.LastName,
                 FirstName: req.body.FirstName,
                 Bio: req.body.Bio,
-                Communities: req.body.Communities,
                 Followers: req.body.Followers,
                 Posts: req.body.Posts,
                 Following: req.body.Following,
@@ -132,7 +131,6 @@ var functions  = {
 
     updateProfile : function(req,res){
         Profile.update({name:req.body.name},{$set:{
-            Communities: req.body.Communities,
             Bio: req.body.Bio,
             LastName: req.body.LastName,
             FirstName: req.body.FirstName,

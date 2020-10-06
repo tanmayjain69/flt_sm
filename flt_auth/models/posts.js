@@ -21,8 +21,10 @@ var postsSchema = new Schema({
         type: Number
     },
     Comments: {
-        type: String
+        type: Array
     }
+},{
+    timestamps: true
 })
 
 module.exports = mongoose.model('Post',postsSchema)

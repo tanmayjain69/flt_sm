@@ -1,3 +1,4 @@
+import 'package:fltsm/screens/HomeScreen/main_home.dart';
 import 'package:fltsm/screens/Login/components/background.dart';
 import 'package:fltsm/services/authenticate.dart';
 import 'package:flutter/material.dart';
@@ -79,7 +80,7 @@ class _BodyState extends State<Body> {
                         );
                         Navigator.pushNamed(
                             context,
-                            ExtractArgumentsScreen.routeName,
+                            HomePage.routeName,
                             arguments: ScreenArguments(
                               'HOME SCREEN',
                               val.data['msg'],),

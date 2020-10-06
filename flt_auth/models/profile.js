@@ -25,10 +25,7 @@ var profileSchema = new Schema({
         
     },
     
-    Communities: {
-        type: Array
-    },
-
+    
     Skills: {
         typr: Array
     },

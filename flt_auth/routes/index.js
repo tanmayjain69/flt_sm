@@ -1,6 +1,8 @@
 const express = require('express')
 const actions = require('../methods/actions')
 const post_actions = require('../methods/post_actions')
+const preference = require('../models/preference')
+const preference_action = require('../methods/preference_action')
 const router = express.Router()
 router.get('/',(req,res) => {
     res.send('Hello World')
@@ -19,7 +21,11 @@ router.get('/profileInfo',actions.getProfileInfo)
 
 //@posts routes
 router.post('/addPost',post_actions.addPost)
-// router.patch('/updatePost',posts.updateProfile)
 router.get('/postInfo',post_actions.getPostInfo)
+
+
+//@preference routes
+router.post('/addPreference',preference_action.addPreference)
+router.get('/getPreference',preference_action.getPreferences)
 
 module.exports = router

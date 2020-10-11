@@ -22,6 +22,9 @@ var postsSchema = new Schema({
     },
     Comments: {
         type: Array
+    },
+    tag: {
+        type: String
     }
 },{
     timestamps: true

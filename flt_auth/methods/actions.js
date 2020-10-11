@@ -130,15 +130,7 @@ var functions  = {
     },
 
     updateProfile : function(req,res){
-        Profile.update({name:req.body.name},{$set:{
-            Bio: req.body.Bio,
-            LastName: req.body.LastName,
-            FirstName: req.body.FirstName,
-            Posts: req.body.Posts,
-            Following: req.body.Following, 
-            Followers: req.body.Followers,
-            Skills: req.body.Skills
-        }}, function(err,result){
+        Profile.update({name:req.body.name},{$set: req.body.body}, function(err,result){
             if(err){
             res.json({success:false,msg:err})  
             }

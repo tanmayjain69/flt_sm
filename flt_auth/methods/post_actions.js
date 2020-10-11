@@ -11,7 +11,8 @@ var functions = {
             Caption: req.body.Caption,
             Likes: req.body.Likes,
             Rewards: req.body.Rewards,
-            Comments: req.body.Comments
+            Comments: req.body.Comments,
+            tag: req.body.tag
         }); 
         newPost.save(function(err,newPost){
             if(err){

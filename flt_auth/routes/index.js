@@ -5,7 +5,7 @@ const preference = require('../models/preference')
 const preference_action = require('../methods/preference_action')
 const router = express.Router()
 router.get('/',(req,res) => {
-    res.send('Hello World')
+    res.send('WELCOME TO SAYYAH')
 })
 
 //@desc auth routes

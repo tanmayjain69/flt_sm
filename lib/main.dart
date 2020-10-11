@@ -1,4 +1,5 @@
 import 'package:fltsm/screens/HomeScreen/main_home.dart';
+import 'package:fltsm/screens/Preferences/preference_page.dart';
 import 'package:fltsm/screens/Welcome/welcome_screen.dart';
 import 'package:fltsm/screens/homescreen.dart';
 import 'package:flutter/material.dart';
@@ -20,12 +21,13 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
     // When navigating to the "/" route, build the FirstScreen widget.
-      // '/': (context) => LoginScreen(),
+      // '/': (context) => Profile1(),
       '/': (context) => WelcomeScreen(),
     // When navigating to the "/second" route, build the SecondScreen widget.
       
     //Navigation with extract route
       HomePage.routeName: (context) => HomePage(),
+      PreferencePage.routeName: (context) => PreferencePage(title: "Select Preferences")
   },
       // home: LoginScreen(),
     );

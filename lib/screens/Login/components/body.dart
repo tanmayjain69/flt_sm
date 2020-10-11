@@ -1,6 +1,8 @@
 import 'package:fltsm/screens/HomeScreen/main_home.dart';
 import 'package:fltsm/screens/Login/components/background.dart';
+import 'package:fltsm/screens/Preferences/preference_page.dart';
 import 'package:fltsm/services/authenticate.dart';
+import 'package:fltsm/services/preference.dart';
 import 'package:flutter/material.dart';
 import 'package:fltsm/Screens/Signup/signup_screen.dart';
 import 'package:fltsm/components/already_have_an_account_acheck.dart';
@@ -22,7 +24,45 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  var name,password,token;
+  var name,password,token,resp_name;
+
+   List<String> reportList = [
+    "Travel",
+    "Books",
+    "Drama",
+    "Music",
+  ];
+
+  List<String> selectedReportList = List();
+
+  _showReportDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          //Here we will build the content of the dialog
+          return AlertDialog(
+            title: Text("Select Preferences"),
+            content: MultiSelectChip(
+              reportList,
+              onSelectionChanged: (selectedList) {
+                setState(() {
+                  selectedReportList = selectedList;
+                });
+              },
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("Next"),
+                onPressed: () => {
+                Navigator.of(context).pop(),
+                PreferenceService().addPreference(resp_name, selectedReportList)
+                }
+              )
+            ],
+          );
+        });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +118,7 @@ class _BodyState extends State<Body> {
                         textColor: Colors.white,
                         fontSize: 16.0
                         );
+                        //for going to homescreen
                         Navigator.pushNamed(
                             context,
                             HomePage.routeName,
@@ -85,6 +126,8 @@ class _BodyState extends State<Body> {
                               'HOME SCREEN',
                               val.data['msg'],),
                         );
+                        resp_name = val.data['msg'];
+                        _showReportDialog();
                       }
                     });  
                   }

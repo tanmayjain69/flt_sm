@@ -23,8 +23,8 @@ dependencies:
   fluttertoast:
   provider: 
   rxdart:
- 
-  
+  circular_profile_avatar:
+  fluttertagselector:
 
   email_validator:
   # The following adds the Cupertino Icons font to your application.

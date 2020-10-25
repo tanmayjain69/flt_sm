@@ -11,8 +11,7 @@ import 'package:fltsm/components/rounded_input_field.dart';
 import 'package:fltsm/components/rounded_password_field.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
-import 'package:fltsm/screens/homescreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Body extends StatefulWidget {
   const Body({
@@ -99,6 +98,7 @@ class _BodyState extends State<Body> {
                 AuthService().login(name, password).then((val){
                   if(val.data['success']){
                     token = val.data['token'];
+
                     Fluttertoast.showToast(msg: 
                     'Authenticated',
                     toastLength: Toast.LENGTH_SHORT,
@@ -107,8 +107,10 @@ class _BodyState extends State<Body> {
                     textColor: Colors.white,
                     fontSize: 16.0
                     );
-                    AuthService().getinfo(token).then((val){
+                    AuthService().getinfo(token).then((val) async{
                       if(val.data['success']){
+                        SharedPreferences preferences = await SharedPreferences.getInstance();
+                        preferences.setString('name', val.data['msg']);
                         token = val.data['token'];
                         Fluttertoast.showToast(msg: 
                         val.data['msg'],
@@ -122,9 +124,7 @@ class _BodyState extends State<Body> {
                         Navigator.pushNamed(
                             context,
                             HomePage.routeName,
-                            arguments: ScreenArguments(
-                              'HOME SCREEN',
-                              val.data['msg'],),
+                            
                         );
                         resp_name = val.data['msg'];
                         _showReportDialog();

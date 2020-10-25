@@ -1,8 +1,11 @@
+import 'package:fltsm/screens/Profile/ppage.dart';
+import 'package:fltsm/screens/Welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fltsm/screens/HomeScreen/feed.dart';
 import 'package:fltsm/screens/HomeScreen/post.dart';
 import 'package:fltsm/screens/HomeScreen/story.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 
@@ -19,10 +22,21 @@ class _HomePageState extends State<HomePage> {
     Feed(),
     Feed(),
     Feed(),
-    Feed(),
+    ProfilePage(),
   ];
 
   int currentPage = 0;
+
+  Future logout(BuildContext context)async{
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.remove('name');
+    Navigator.push(context, 
+    MaterialPageRoute(
+                    builder: (context) {
+                      return WelcomeScreen();
+                    },
+                  ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +55,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {logout(context);},
           icon: Icon(
             Feather.camera,
             color: Colors.black,
@@ -72,6 +86,7 @@ class _HomePageState extends State<HomePage> {
           setState(() {
             currentPage = i;
           });
+          
         },
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: false,
@@ -96,9 +111,11 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Feather.user),
-            title: Text("Account")
+            title: Text("Account"),
+            
           ),
         ],
+        
       ),
     );
   }

@@ -141,7 +141,7 @@ var functions  = {
     },
 
     getProfileInfo : function(req,res){
-        Profile.findOne({name: req.body.name},function(err,result){
+        Profile.findOne({name: req.query.name},function(err,result){
             if(err) throw err;
             res.json({success:true,msg:result}) 
         })

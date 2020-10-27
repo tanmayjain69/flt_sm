@@ -2,6 +2,13 @@ import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePageCover extends StatelessWidget {
+
+  String fname,bio;
+  ProfilePageCover(String m, String b){
+    this.fname = m;
+    this.bio = b;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -27,7 +34,7 @@ class ProfilePageCover extends StatelessWidget {
                       backgroundColor: Colors.transparent, // sets background color, default Colors.white
                       borderWidth: 20,  // sets border, default 0.0
                       initialsText: Text(
-                        "SB",
+                        fname[0],
                         style: TextStyle(fontSize: 40, color: Colors.white),
                       ),  // sets initials text, set your own style, default Text('')
                       borderColor: Colors.brown, // sets border color, default Colors.white
@@ -35,7 +42,7 @@ class ProfilePageCover extends StatelessWidget {
                       foregroundColor: Colors.brown.withOpacity(0.5), //sets foreground colour, it works if showInitialTextAbovePicture = true , default Colors.transparent
                       cacheImage: true, // allow widget to cache image against provided url
                       onTap: () {
-                        print('SB');
+                        print(fname);
                       }, // sets on tap 
                       showInitialTextAbovePicture: true, // setting it true will show initials text above profile picture, default false  
                       )
@@ -51,14 +58,14 @@ class ProfilePageCover extends StatelessWidget {
                           margin: EdgeInsets.all(10),
                           padding: EdgeInsets.only(top: 25),
                           // alignment: Alignment.center,
-                          child: Text("Sambhav Bhandari",
+                          child: Text(fname,
                           style: TextStyle(color: Colors.black, fontSize: 15.0),
                                 ),
                                 
                         )
                     ), 
                     Positioned(
-                    right: 90.0,
+                    right: -30.0,
                     top: 200.0,
                     
                     child: Container(
@@ -67,9 +74,9 @@ class ProfilePageCover extends StatelessWidget {
                           height: 70,
                           margin: EdgeInsets.all(10),
                           padding: EdgeInsets.only(top: 25),
-                          alignment: Alignment.topRight,
-                          child: Text("Traveller \nExploring the unexplpored",
-                          // textAlign: TextAlign.left,
+                          alignment: Alignment.topLeft,
+                          child: Text(bio,
+                          textAlign: TextAlign.left,
                           
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(color: Colors.black, fontSize: 11.0),

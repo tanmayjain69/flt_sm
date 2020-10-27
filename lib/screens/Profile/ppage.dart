@@ -20,50 +20,54 @@ class _ProfilePageState extends State<ProfilePage> {
     Size size = MediaQuery.of(context).size;
     return Container(
         color: Colors.white,
-      child: GetX<ProfileController>(
-        builder: (controller) {
-          return SingleChildScrollView(
-            child: Column(
-              
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-               
-               Container(
-                          width: 350,
-                          height: 40,
-                          margin: EdgeInsets.all(10),
-                          padding: EdgeInsets.only(top: 0),
-                          // alignment: Alignment.center,
-                          child: Text("${controller.profiledetails.length}",
-                          style: TextStyle(color: Colors.black, fontSize: 20.0),
-                                ),
-                        ),
-              
-              SizedBox(
-              width: double.infinity,
-              height: 310,
-                child: ProfilePageCover()
+          child:  GetX<ProfileController>(
+            
+            builder: (controller) {
+              return SingleChildScrollView(
+                
+                child: Column(
+                  
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                   
+                   Container(
+                              width: 350,
+                              height: 40,
+                              margin: EdgeInsets.all(10),
+                              padding: EdgeInsets.only(top: 0),
+                              // alignment: Alignment.center,
+                              child: Text((controller.profiledetails?.length >0 ? controller.profiledetails[0].name:''),
+                              style: TextStyle(color: Colors.black, fontSize: 20.0),
+                                    ),
+                            ),
+                  
+                  SizedBox(
+                  width: double.infinity,
+                  height: 310,
+                    child: ProfilePageCover(controller.profiledetails[0].fname,controller.profiledetails[0].bio)
+                    ),
+               SizedBox(   
+                 height: 150,
+                 width: double.infinity,
+                  child: ProfileDetails(controller.profiledetails[0].followers,controller.profiledetails[0].following,controller.profiledetails[0].posts)
               ),
-           SizedBox(   
-             height: 150,
-             width: double.infinity,
-              child: ProfileDetails()
-          ),
-          SizedBox(
-            width: 400,
-          child: EditProfile(),
-          ),
-          SizedBox(
-            width: double.infinity,
-            height: 500,
-            child: ProfileTabBar()
-          ),
-          
-              ],
-            ),
-          );
-        }
-      )
+              SizedBox(
+                width: 400,
+              child: EditProfile(),
+              ),
+              SizedBox(
+                width: double.infinity,
+                height: 500,
+                child: ProfileTabBar()
+              ),
+              
+                  ],
+                ),
+              );
+            }
+          )
+        
+      
     );
   }
 }

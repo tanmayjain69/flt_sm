@@ -3,6 +3,7 @@ const actions = require('../methods/actions')
 const post_actions = require('../methods/post_actions')
 const preference = require('../models/preference')
 const preference_action = require('../methods/preference_action')
+const query_actions = require('../methods/query_actions')
 const router = express.Router()
 router.get('/',(req,res) => {
     res.send('WELCOME TO SAYYAH')
@@ -28,4 +29,6 @@ router.get('/postInfo',post_actions.getPostInfo)
 router.post('/addPreference',preference_action.addPreference)
 router.get('/getPreference',preference_action.getPreferences)
 
+//@query routes
+router.post('/addQuery',query_actions.addQuery)
 module.exports = router

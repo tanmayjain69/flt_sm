@@ -44,12 +44,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   SizedBox(
                   width: double.infinity,
                   height: 310,
-                    child: ProfilePageCover(controller.profiledetails[0].fname,controller.profiledetails[0].bio)
+                    child: ProfilePageCover()
                     ),
                SizedBox(   
                  height: 150,
                  width: double.infinity,
-                  child: ProfileDetails(controller.profiledetails[0].followers,controller.profiledetails[0].following,controller.profiledetails[0].posts)
+                  child: ProfileDetails()
               ),
               SizedBox(
                 width: 400,

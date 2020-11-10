@@ -1,4 +1,5 @@
 import 'package:fltsm/screens/Profile/ppage.dart';
+import 'package:fltsm/screens/Queries/query_main.dart';
 import 'package:fltsm/screens/Welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -19,7 +20,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var _pages = [
     Feed(),
-    Feed(),
+    QueryMain(),
     Feed(),
     Feed(),
     ProfilePage(),
@@ -45,7 +46,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Color(0xFFEEEEEE),
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Color(0xFFEEEEEE),
+        backgroundColor: Colors.white,
         brightness: Brightness.light,
         centerTitle: true,
         title: Text(
@@ -57,22 +58,29 @@ class _HomePageState extends State<HomePage> {
         leading: IconButton(
           onPressed: () {logout(context);},
           icon: Icon(
-            Feather.camera,
+            Feather.log_out,
             color: Colors.black,
           ),
         ),
         actions: <Widget>[
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+            Navigator.push(context, 
+    MaterialPageRoute(
+                    builder: (context) {
+                      return QueryMain();
+                    },
+                  ));
+            },
             icon: Icon(
-              Feather.tv,
+              Feather.send,
               color: Colors.black,
             ),
           ),
           IconButton(
             onPressed: () {},
             icon: Icon(
-              FontAwesome.send_o,
+              FontAwesome.dollar,
               color: Colors.black,
             ),
           ),

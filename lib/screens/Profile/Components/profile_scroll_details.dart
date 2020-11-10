@@ -1,14 +1,16 @@
+import 'package:fltsm/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class ProfileDetails extends StatelessWidget {
+class ProfileDetails extends StatefulWidget {
 
-  int followers,following,posts;
-  ProfileDetails(int fl, int fo, int p){
-    this.followers = fl;
-    this.following = fo;
-    this.posts = p;
-  }
+  @override
+  _ProfileDetailsState createState() => _ProfileDetailsState();
+}
 
+class _ProfileDetailsState extends State<ProfileDetails> {
+
+  ProfileController instd = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +54,7 @@ class ProfileDetails extends StatelessWidget {
                                        children: [
                                          Container(
                                            child: Text(
-                                             followers.toString(), 
+                                             instd.profiledetails?.length >0 ?'${instd.profiledetails[0].followers}':'', 
                                              style: TextStyle(color: Colors.black, fontSize: 20),
                                             textAlign: TextAlign.center,
                                            )
@@ -72,7 +74,7 @@ class ProfileDetails extends StatelessWidget {
                                        children: [
                                          Container(
                                            child: Text(
-                                             posts.toString(), 
+                                             instd.profiledetails?.length >0 ?'${instd.profiledetails[0].posts}': '', 
                                              style: TextStyle(color: Colors.black, fontSize: 20),
                                             textAlign: TextAlign.center,
                                            )
@@ -92,7 +94,7 @@ class ProfileDetails extends StatelessWidget {
                                        children: [
                                          Container(
                                            child: Text(
-                                             following.toString(), 
+                                             instd.profiledetails?.length >0 ? '${instd.profiledetails[0].following}':'', 
                                              style: TextStyle(color: Colors.black, fontSize: 20),
                                             textAlign: TextAlign.center,
                                            )

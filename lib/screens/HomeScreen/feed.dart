@@ -1,3 +1,5 @@
+import 'package:fltsm/screens/HomeScreen/Components/drop_down.dart';
+import 'package:fltsm/screens/HomeScreen/Components/slidebar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fltsm/screens/HomeScreen/post.dart';
@@ -5,40 +7,14 @@ import 'package:fltsm/screens/HomeScreen/story.dart';
 
 class Feed extends StatelessWidget {
   List<Story> _stories = [
-    Story(
-        "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        "Jazmin"),
-    Story(
-        "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        "Sylvester"),
-    Story(
-        "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        "Lavina"),
-    Story(
-        "https://images.pexels.com/photos/1124724/pexels-photo-1124724.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        "Mckenzie"),
-    Story(
-        "https://images.pexels.com/photos/1845534/pexels-photo-1845534.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        "Buster"),
-    Story(
-        "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        "Carlie"),
-    Story(
-        "https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        "Edison"),
-    Story(
-        "https://images.pexels.com/photos/573299/pexels-photo-573299.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        "Flossie"),
-    Story(
-        "https://images.pexels.com/photos/756453/pexels-photo-756453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        "Lindsey"),
-    Story(
-        "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        "Freddy"),
-    Story(
-        "https://images.pexels.com/photos/1832959/pexels-photo-1832959.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        "Litzy")
-  ];
+    Story("HOME"),
+    Story("BOOKS"),
+    Story("TRAVEL"),
+    Story("SPORTS"),
+    Story("DEVELOPER"),
+    Story("ART"),
+    Story("DANCE")
+    ];
 
   List<Post> posts = [
     Post(
@@ -95,6 +71,7 @@ class Feed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.white,
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -106,63 +83,55 @@ class Feed extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text(
-                    "Stories",
-                    style: TextStyle(
-                      fontSize: 14,
-                    ),
-                  ),
-                  Text(
-                    "Watch All",
-                    style: TextStyle(
-                      fontSize: 14,
-                    ),
-                  ),
+                  Explore()
+                  
                 ],
               ),
             ),
+            Divider(),
             Container(
               width: MediaQuery.of(context).size.width,
               margin: EdgeInsets.symmetric(
                 vertical: 10,
               ),
-              height: 110,
+              height: 30,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
                 children: _stories.map((story) {
                   return Column(
                     children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.symmetric(
-                          horizontal: 15,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(70),
-                          border: Border.all(
-                            width: 3,
-                            color: Color(0xFF8e44ad),
-                          ),
-                        ),
+                      Material(
+                        color: Color(0xFFFFE3D3),
+                        child: InkWell(
                         child: Container(
-                          padding: EdgeInsets.all(
-                            2,
+                          margin: EdgeInsets.symmetric(
+                            horizontal: 15,
                           ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(70),
-                            child: Image(
-                              image: NetworkImage(story.image),
-                              width: 70,
-                              height: 70,
-                              fit: BoxFit.cover,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(0),
+                            
+                          ),
+                          child: Container(
+                            padding: EdgeInsets.all(
+                              2,
                             ),
+                            
+                              child: Text(
+                                story.name,
+                                style: TextStyle(
+                                fontSize: 18,
+                                  )     
+                              ),
+                            
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(story.name),
+                        onTap: () { 
+                            print(story.name); 
+                        },
+                        
+                        ),
+                      )
                     ],
                   );
                 }).toList(),
@@ -203,7 +172,72 @@ class Feed extends StatelessWidget {
                                   SizedBox(
                                     width: 10,
                                   ),
-                                  Text(posts[i].username),
+                                  Column(
+                                  children: <Widget> [
+                                  
+                                  Container(
+                                    
+                                    alignment: Alignment.topRight,
+                                    child: Text( posts[i].username,
+                                            textAlign: TextAlign.right,
+                                           style: TextStyle(
+                                            fontSize: 13.5,
+                                            fontWeight: FontWeight.bold,
+                                          
+                                    )),
+                                  ),
+                                  
+                                  
+                              
+                                   RichText(
+                                          softWrap: true,
+                                          overflow: TextOverflow.visible,
+                                          text: TextSpan(
+                                            children: [
+                                              
+                                              TextSpan(
+                                                text: "Chopta, Tungnath",
+                                                style: TextStyle(color: Colors.black),
+                                              ),
+                                              
+                                            ],
+                                          ),
+                                        ),
+                                  
+                                  
+                                   Row(
+                                      children: [
+                                        RichText(
+                                          softWrap: true,
+                                          overflow: TextOverflow.visible,
+                                          text: TextSpan(
+                                            children: [
+                                              
+                                              TextSpan(
+                                                text: "8.6",
+                                                style: TextStyle(color: Colors.black),
+                                              ),
+                                              
+                                            ],
+                                          ),
+                                        ),
+                        
+                                        Icon(Icons.star,
+                                        size: 20.0,
+                                        color: Colors.yellow,
+                                        ),
+                                        Text(' Travel ',
+                                          
+                                          style: TextStyle(
+                                            fontSize: 13.5,
+                                            backgroundColor: Color(0xFFFFE3D3)
+                                             )
+                                            )
+                                      ],
+                                    ),
+                                    
+                                  
+                                  ])
                                 ],
                               ),
                               IconButton(
@@ -213,106 +247,18 @@ class Feed extends StatelessWidget {
                             ],
                           ),
                         ),
-
-                        FadeInImage(
-                          image: NetworkImage(posts[i].postImage),
-                          placeholder: AssetImage("assets/placeholder.png"),
-                          width: MediaQuery.of(context).size.width,
-                        ),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(FontAwesome.heart_o),
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(FontAwesome.comment_o),
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(FontAwesome.send_o),
-                                ),
-                              ],
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(FontAwesome.bookmark_o),
-                            ),
-                          ],
-                        ),
-
                         Container(
                           width: MediaQuery.of(context).size.width,
                           margin: EdgeInsets.symmetric(
                             horizontal: 14,
+                            vertical: 10,
                           ),
                           child: RichText(
                             softWrap: true,
                             overflow: TextOverflow.visible,
                             text: TextSpan(
                               children: [
-                                TextSpan(
-                                  text: "Liked By ",
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                                TextSpan(
-                                  text: "Sigmund,",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
-                                ),
-                                TextSpan(
-                                  text: " Yessenia,",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
-                                ),
-                                TextSpan(
-                                  text: " Dayana",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
-                                ),
-                                TextSpan(
-                                  text: " and",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: " 1263 others",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-
-                        // caption
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          margin: EdgeInsets.symmetric(
-                            horizontal: 14,
-                            vertical: 5,
-                          ),
-                          child: RichText(
-                            softWrap: true,
-                            overflow: TextOverflow.visible,
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: posts[i].username,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
-                                ),
+                                
                                 TextSpan(
                                   text: " ${posts[i].caption}",
                                   style: TextStyle(color: Colors.black),
@@ -321,6 +267,49 @@ class Feed extends StatelessWidget {
                             ),
                           ),
                         ),
+                        FadeInImage(
+                          image: NetworkImage(posts[i].postImage),
+                          placeholder: AssetImage("assets/placeholder.png"),
+                          width: MediaQuery.of(context).size.width,
+                        ),
+                        
+                       
+                        Container(
+                          child: SliderExample()
+                          
+                        ),
+
+                        
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Row(
+                              children: <Widget>[
+                                IconButton(
+                                  padding: EdgeInsets.only(left: 60),
+                                  onPressed: () {},
+                                  icon: Icon(FontAwesome.dollar),
+                                ),
+                                Text("32"),
+                                IconButton(
+                                  padding: EdgeInsets.only(left: 70),
+                                  onPressed: () {},
+                                  icon: Icon(FontAwesome.comment_o),
+                                ),
+                                Text(" 22"),
+                                IconButton(
+                                  padding: EdgeInsets.only(left: 70),
+                                  onPressed: () {},
+                                  icon: Icon(FontAwesome.send_o),
+                                ),
+                                Text(" Share")
+                              ],
+                            ),
+                            
+                          ],
+                        ),
+
+
 
                         // post date
                         Container(

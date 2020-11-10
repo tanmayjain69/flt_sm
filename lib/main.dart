@@ -7,18 +7,27 @@ import 'constants.dart';
 void main() => runApp(MyApp());
 
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  Future<String> getName() async{
+Future<String> getName() async{
     WidgetsFlutterBinding.ensureInitialized();
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var name = preferences.getString('name');
-    print(name);
+    // print(name);
     return name;
   }
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  
   @override
   Widget build(BuildContext context) {
-    // var name = getName(); 
+    String name;
+    getName().then((value) {
+      name = value;
+      print(name);
+    }); 
+    // print(name);
+
+  
     return MaterialApp(
       title: 'SAYYAH',
       debugShowCheckedModeBanner: false,
@@ -32,7 +41,7 @@ class MyApp extends StatelessWidget {
       routes: {
     // When navigating to the "/" route, build the FirstScreen widget.
 
-      '/': (context) => getName() == null ? WelcomeScreen():HomePage(),
+      '/': (context) => '$name' == null ? WelcomeScreen() : HomePage(),
       // '/': (context) => ProfilePage(),
     // When navigating to the "/second" route, build the SecondScreen widget.
       

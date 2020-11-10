@@ -1,12 +1,13 @@
-import 'package:fltsm/screens/Profile/Components/profile_grid.dart';
+import 'package:fltsm/screens/Queries/Components/askcomm.dart';
+import 'package:fltsm/screens/Queries/Components/chat_view.dart';
 import 'package:flutter/material.dart';
 
-class ProfileTabBar extends StatefulWidget {
+class QueryTab extends StatefulWidget {
   @override
-  _ProfileTabBarState createState() => _ProfileTabBarState();
+  _QueryTabState createState() => _QueryTabState();
 }
 
-class _ProfileTabBarState extends State<ProfileTabBar> {
+class _QueryTabState extends State<QueryTab> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,6 +17,9 @@ class _ProfileTabBarState extends State<ProfileTabBar> {
                     length: 2,
                     child: Column(
                       children: <Widget>[
+                        Divider(
+                          height: 30,
+                        ),
                         Container(
                           constraints: BoxConstraints.expand(height: 50),
                           child: TabBar(
@@ -25,24 +29,22 @@ class _ProfileTabBarState extends State<ProfileTabBar> {
                             labelColor: Color(0xff2D2727),
                             labelStyle: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 19
+                                fontSize: 17
 
                             ),
                             tabs: [         
-                            Tab(text: "POSTS"),
-                            Tab(text: "REWARDS"),
+                            Tab(text: "Chats"),
+                            Tab(text: "Ask the Community"),
                             
                           ]),
                         ),
                         Expanded(
                           child: Container(
                             child: TabBarView(children: [
-                              Container(
-                                child: ProfileGrid(),
-                              ),
-                              Container(
-                                child: Text("Articles Body"),
-                              ),
+
+                              ChatView(),
+                              AskComm()
+                              
                           
                             ]),
                           ),
@@ -55,5 +57,6 @@ class _ProfileTabBarState extends State<ProfileTabBar> {
                 
               
     ));
+    
   }
 }

@@ -32,14 +32,17 @@ var profileSchema = new Schema({
 
     Followers: {
         type: Number,
+        default: 0
     },
 
     Posts: {
         type: Number,
+        default: 0
     },
 
     Following: {
-        type: Number
+        type: Number,
+        default: 0
     },
 
     

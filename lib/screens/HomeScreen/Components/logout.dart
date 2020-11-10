@@ -9,10 +9,11 @@ class LogOut extends StatefulWidget {
 
 class _LogOutState extends State<LogOut> {
 
+
   Future getname() async{
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState() {
-      var name = preferences.getString('name');
+       preferences.getString('name');
      }
   }
 
@@ -25,6 +26,12 @@ class _LogOutState extends State<LogOut> {
                       return WelcomeScreen();
                     },
                   ));
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    getname();
   }
 
   @override

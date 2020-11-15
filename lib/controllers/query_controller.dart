@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:fltsm/screens/Queries/Model/query_post.dart';
 import 'package:fltsm/services/query.dart';
 import 'package:get/get.dart';
@@ -22,12 +23,15 @@ class QueryController extends GetxController{
       await Future.delayed(Duration(seconds: 1));
       print(val.data['msg']);
       
-      final jsonResponse = val.data['msg'];
-      QueryPost querypost = new QueryPost.fromJson(jsonResponse);
-      print("ittttttttttttt");
-      print(querypost);
-      querydetails.value = [querypost];
-      // print(profiledetails[0].fname);
+      var jsonResponse = val.data['msg'];
+      for(int i=0;i<jsonResponse.length;i++){
+      QueryPost querypost =  QueryPost.fromJson(jsonResponse[i]);
+      querydetails.add(querypost);
+      }
+      // print(querydetails);
+      // print(querypost);
+      // querydetails.value = l;
+      print(querydetails[0].details);
     });
   }
 

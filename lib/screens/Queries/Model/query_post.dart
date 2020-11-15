@@ -22,7 +22,8 @@ factory QueryPost.fromJson(Map<String, dynamic> parsedJson) {
       id: parsedJson['_id'],
       username: parsedJson['name'],
       details: parsedJson['details'],
-      tag:  parsedJson['tag']
+      tag:  parsedJson['tag'],
+      userImage: "https://s3.amazonaws.com/uifaces/faces/twitter/felipecsl/128.jpg"
   );
   
 }

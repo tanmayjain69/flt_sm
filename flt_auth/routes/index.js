@@ -31,4 +31,7 @@ router.get('/getPreference',preference_action.getPreferences)
 
 //@query routes
 router.post('/addQuery',query_actions.addQuery)
+router.get('/getQuery', query_actions.getQuery)
+
+
 module.exports = router

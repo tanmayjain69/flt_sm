@@ -18,6 +18,17 @@ var functions = {
             
         })
         
+    },
+
+    getQuery: function (req,res) {
+     
+        Query.find( function(err,post){
+            if(err) throw (err);
+            else{
+                res.json({success:true,msg:post})
+            }
+        });
+        
     }
 }
 

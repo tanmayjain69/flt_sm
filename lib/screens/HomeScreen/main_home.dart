@@ -4,8 +4,6 @@ import 'package:fltsm/screens/Welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fltsm/screens/HomeScreen/feed.dart';
-import 'package:fltsm/screens/HomeScreen/post.dart';
-import 'package:fltsm/screens/HomeScreen/story.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 

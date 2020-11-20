@@ -1,8 +1,10 @@
 import 'package:fltsm/controllers/query_controller.dart';
-import 'package:fltsm/screens/Queries/Model/query_post.dart';
+import 'package:fltsm/screens/Queries/Components/filter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
+
+import 'dp_down_sort.dart';
 
 class AskComm extends StatefulWidget {
 
@@ -33,12 +35,34 @@ class _AskCommState extends State<AskComm> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.white,
       child: GetX<QueryController>(
         builder: (controller) {
           return Column(
             children: <Widget>[
               Container(
+                              
+                              padding: EdgeInsets.only(left:10,top: 10),
+                              alignment: Alignment.topLeft,
+                              child: Text("Post Your Query...",
+                                        style: TextStyle(
+                                                fontSize: 20.5,
+                                                fontWeight: FontWeight.bold,
+                                              
+                                        )
+                              )
+                            ),
+              Container(
+                padding: EdgeInsets.only(left:70,top: 10),
+                child: Row(
+                  children: <Widget>[
+                    Sort(),
+                    Filter()
+                  ],),
+              ),
+              Container(
                   width: MediaQuery.of(context).size.width,
+                   
                   child: ListView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
@@ -104,7 +128,7 @@ class _AskCommState extends State<AskComm> {
                                             ),
                             
                   
-                                            Text(' Travel ',
+                                            Text(' ${controller.querydetails[i].tag} ',
                                               
                                               style: TextStyle(
                                                 fontSize: 13.5,
@@ -196,8 +220,8 @@ class _AskCommState extends State<AskComm> {
                     },
                   ),
                 ),
-                 Align(
-                  alignment: Alignment.bottomRight,
+                 Container(
+                  padding: EdgeInsets.only(top: 80,left: 270),
                   child:  FloatingActionButton(
                   tooltip: 'Add', // used by assistive technologies
                   child: Icon(Icons.add),

@@ -32,7 +32,15 @@ var functions = {
                 res.json({success:true,msg:post})
             }
         });
-    }
+    },
+    getAllPosts: function(req,res) {
+      Post.find(function(err,post){
+          if(err) throw (err);
+          else{
+              res.json({success:true,msg:post})
+          }
+      });  
+    },
 }
 
 

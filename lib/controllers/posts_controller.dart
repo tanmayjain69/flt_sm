@@ -1,12 +1,9 @@
-import 'dart:convert';
-import 'package:fltsm/Models/query_post.dart';
-import 'package:fltsm/services/query.dart';
+import 'package:fltsm/Models/posts_model.dart';
+import 'package:fltsm/services/posts.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-
-class QueryController extends GetxController{
-  var querydetails = List<QueryPost>().obs;
+class PostController extends GetxController{
+  var postDetails = List<Post>().obs;
 
   @override
   void onInit(){
@@ -19,14 +16,14 @@ class QueryController extends GetxController{
     // SharedPreferences preferences = await SharedPreferences.getInstance();
     // var name = preferences.getString('name');
 
-    QueryService().getQueryDetail().then((val) async {
+    PostService().getAllPosts().then((val) async {
       await Future.delayed(Duration(seconds: 1));
       // print(val.data['msg']);
       
       var jsonResponse = val.data['msg'];
       for(int i=0;i<jsonResponse.length;i++){
-      QueryPost querypost =  QueryPost.fromJson(jsonResponse[i]);
-      querydetails.add(querypost);
+      Post post =  Post.fromJson(jsonResponse[i]);
+      postDetails.add(post);
       }
       // print(querydetails);
       // print(querypost);

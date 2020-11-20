@@ -29,7 +29,7 @@ import 'package:flutter/material.dart';
                           });
                         },
                         semanticFormatterCallback: (double newValue) {
-                          return '${newValue.round()} dollars';
+                          return '${newValue.round()} Stars';
                         }
                     )
                   

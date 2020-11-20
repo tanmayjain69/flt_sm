@@ -23,7 +23,7 @@ router.get('/profileInfo',actions.getProfileInfo)
 //@posts routes
 router.post('/addPost',post_actions.addPost)
 router.get('/postInfo',post_actions.getPostInfo)
-
+router.get('/getAllPosts',post_actions.getAllPosts)
 
 //@preference routes
 router.post('/addPreference',preference_action.addPreference)

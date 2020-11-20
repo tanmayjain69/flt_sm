@@ -1,4 +1,4 @@
-import 'package:fltsm/screens/Queries/Model/chat.dart';
+import 'package:fltsm/Models/chat.dart';
 import 'package:flutter/material.dart';
 
 class ChatView extends StatefulWidget {
@@ -14,7 +14,7 @@ class _ChatViewState extends State<ChatView> {
     QueryChat(
         username: "Brianne",
         userImage:
-            "https://s3.amazonaws.com/uifaces/faces/twitter/felipecsl/128.jpg",
+            "https://www.aceshowbiz.com/images/photo/robert_downey_jr_.jpg",
         details: "Consequatur nihil aliquid omnis consequatur."
       )
   ];

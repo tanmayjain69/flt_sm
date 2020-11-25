@@ -62,7 +62,7 @@ class _ProfilePageCoverState extends State<ProfilePageCover> {
                           margin: EdgeInsets.all(10),
                           padding: EdgeInsets.only(top: 25),
                           // alignment: Alignment.center,
-                          child: Text(inst.profiledetails?.length >0 ? '${inst.profiledetails[0].fname}':'',
+                          child: Text(inst.profiledetails?.length >0 ? '${inst.profiledetails[0].fname}'+' ${inst.profiledetails[0].lname}':'',
                           style: TextStyle(color: Colors.black, fontSize: 15.0),
                                 ),
                                 

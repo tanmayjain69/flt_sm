@@ -130,12 +130,12 @@ var functions  = {
     },
 
     updateProfile : function(req,res){
-        Profile.update({name:req.body.name},{$set: req.body.body}, function(err,result){
+        Profile.findOneAndUpdate({name:req.params.name},{$set: req.body}, function(err,result){
             if(err){
             res.json({success:false,msg:err})  
             }
             else{
-                res.json({success:true,msg:'Successfully updated'})  
+                res.json({success:true, msg: "Successfully Updated"})  
             }
         });
     },

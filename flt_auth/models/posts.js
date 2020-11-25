@@ -9,7 +9,7 @@ var postsSchema = new Schema({
     },
     Image : {
         type: String,
-        default: " "
+        default: "https://www.jpost.com/HttpHandlers/ShowImage.ashx?id=320510&w=898&h=628"
     },
     Caption : {
         type: String
@@ -24,6 +24,9 @@ var postsSchema = new Schema({
         type: Array
     },
     tag: {
+        type: String
+    },
+    Location: {
         type: String
     }
 },{

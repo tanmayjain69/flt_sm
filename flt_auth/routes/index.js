@@ -16,7 +16,7 @@ router.get('/getinfo',actions.getinfo)
 
 //@profile routes
 router.post('/addtoProfile',actions.addtoProfile)
-router.patch('/update',actions.updateProfile)
+router.patch('/update/:name',actions.updateProfile)
 router.get('/profileInfo',actions.getProfileInfo)
 // router.patch('/updateImage',profileaction.updateImage)
 

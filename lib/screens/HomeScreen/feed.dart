@@ -154,7 +154,7 @@ class _FeedState extends State<Feed> {
                                                 children: [
                                                   
                                                   TextSpan(
-                                                    text: "Chopta, Tungnath",
+                                                    text: '${controller.postDetails[i].location}',
                                                     style: TextStyle(color: Colors.black),
                                                   ),
                                                   
@@ -276,7 +276,7 @@ class _FeedState extends State<Feed> {
                               ),
                               alignment: Alignment.topLeft,
                               child: Text(
-                                "Febuary 2020",
+                                '${controller.postDetails[i].date}',
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                   color: Colors.grey,

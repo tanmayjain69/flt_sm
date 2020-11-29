@@ -1,9 +1,8 @@
 import 'dart:convert';
-
 import 'package:fltsm/controllers/profile_controller.dart';
+import 'package:fltsm/controllers/query_controller.dart';
 import 'package:fltsm/screens/Profile/Components/settings.dart';
-import 'package:fltsm/screens/Profile/ppage.dart';
-import 'package:fltsm/services/profile.dart';
+import 'package:fltsm/services/query.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -11,37 +10,27 @@ import 'package:get/get.dart';
 
 
 
-class EditProfilePage extends StatefulWidget {
-   const EditProfilePage({ Key key }) : super(key: key);
+class QueryUpload extends StatefulWidget {
   @override
-  _EditProfilePageState createState() => _EditProfilePageState();
+  _QueryUpload createState() => _QueryUpload();
 }
 
-class _EditProfilePageState extends State<EditProfilePage> {
+class _QueryUpload extends State<QueryUpload> {
 
-  ProfileController instd = Get.find();
-  final TextEditingController biocont = TextEditingController(); 
-  final TextEditingController namecont = TextEditingController(); 
-  final TextEditingController fnamecont = TextEditingController(); 
+  ProfileController inst = Get.find();
+  QueryController query = Get.find();
+  final TextEditingController tagcont = TextEditingController(); 
+  final TextEditingController detailscont = TextEditingController(); 
+  // final TextEditingController detcont = TextEditingController(); 
   
   var data = new Map();
 
   bool showPassword = false;
 
   void update(){
-            print(biocont.text+fnamecont.text+namecont.text);
+            print(tagcont.text+detailscont.text);
                       
-                      if(biocont.text != ""){
-                      data['Bio'] = biocont.text;
-                      }
-                      if(fnamecont.text != ""){
-                        data['FirstName'] = fnamecont.text;
-                      }
-                      if(namecont.text != ""){
-                        data['name'] = namecont.text;
-                      }
-                      
-                      if(data == {}){
+                      if(tagcont.text == " " || detailscont.text == " "){
                         Fluttertoast.showToast(
                         msg: "Nothing to Update",
                         toastLength: Toast.LENGTH_SHORT,
@@ -52,10 +41,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         fontSize: 16.0
                         );
                       }
+                      else{
+                      data['name'] = inst.profiledetails[0].name;
+                      data['tag'] = tagcont.text;
+                      data['details'] = detailscont.text;
+                      query.addQuery(data);
                       
-                      instd.updateDetails(data);
-                    
-
+                    }
                       
   }
 
@@ -96,61 +88,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
           child: ListView(
             children: [
               
-              SizedBox(
-                height: 15,
-              ),
-              Center(
-                child: Stack(
-                  children: [
-                    Container(
-                      width: 130,
-                      height: 130,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              width: 4,
-                              color: Theme.of(context).scaffoldBackgroundColor),
-                          boxShadow: [
-                            BoxShadow(
-                                spreadRadius: 2,
-                                blurRadius: 10,
-                                color: Colors.black.withOpacity(0.1),
-                                offset: Offset(0, 10))
-                          ],
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
-                                "https://www.aceshowbiz.com/images/photo/robert_downey_jr_.jpg",
-                              ))),
-                    ),
-                    Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              width: 4,
-                              color: Theme.of(context).scaffoldBackgroundColor,
-                            ),
-                            color:  Color(0xFFFFE3D3),
-                          ),
-                          child: Icon(
-                            Icons.edit,
-                            color: Colors.black,
-                          ),
-                        )),
-                  ],
-                ),
-              ),
+             
               SizedBox(
                 height: 35,
               ),
-              buildTextField("Full Name", instd.profiledetails[0].fname, false,fnamecont),
-              buildTextField("username", instd.profiledetails[0].name, false,namecont),
-              buildTextField("Bio", instd.profiledetails[0].bio, false,biocont),
+              buildTextField("Community","Select Community", false,tagcont),
+              buildTextField("Details", "Add Details",false,detailscont),
               // buildTextField("Mobile Number", "01234567", false),
               SizedBox(
                 height: 35,
@@ -223,8 +166,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
             floatingLabelBehavior: FloatingLabelBehavior.always,
             hintText: placeholder,
             hintStyle: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+              fontSize: 14,
+              
               color: Colors.black,
             )),
       ),

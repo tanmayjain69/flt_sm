@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:fltsm/Models/query_post.dart';
 import 'package:fltsm/services/query.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 
 class QueryController extends GetxController{
@@ -33,6 +32,15 @@ class QueryController extends GetxController{
       // querydetails.value = l;
       // print(querydetails[0].details);
     });
+  
+  }
+  void addQuery(data) async {
+      var dat =json.encode(data);
+      QueryService().addQuery(dat).then((val) async {
+                        print(val.data);
+    });
+
+    fetchDetails();
   }
 
 }

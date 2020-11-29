@@ -4,30 +4,20 @@ import 'package:fltsm/screens/Welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'constants.dart';
-void main() => runApp(MyApp());
-
-
-Future<String> getName() async{
+Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    var name = preferences.getString('name');
-    // print(name);
-    return name;
-  }
+    name = preferences.getString('name');
+   runApp(MyApp());
+}
+
+var name;
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
-  
   @override
   Widget build(BuildContext context) {
-    String name;
-    getName().then((value) {
-      name = value;
-      print(name);
-    }); 
-    // print(name);
-
-  
+    print(name);
     return MaterialApp(
       title: 'SAYYAH',
       debugShowCheckedModeBanner: false,
@@ -41,7 +31,7 @@ class MyApp extends StatelessWidget {
       routes: {
     // When navigating to the "/" route, build the FirstScreen widget.
 
-      '/': (context) => '$name' == null ? WelcomeScreen() : HomePage(),
+      '/': (context) => name == null ? WelcomeScreen() : HomePage(),
       // '/': (context) => ProfilePage(),
     // When navigating to the "/second" route, build the SecondScreen widget.
       

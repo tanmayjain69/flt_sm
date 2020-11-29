@@ -14,7 +14,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   final profilecontroller = Get.put(ProfileController());
   
-  
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -37,8 +37,9 @@ class _ProfilePageState extends State<ProfilePage> {
                               padding: EdgeInsets.only(top: 0),
                               // alignment: Alignment.center,
                               child: Text((controller.profiledetails?.length >0 ? controller.profiledetails[0].name:''),
-                              style: TextStyle(color: Colors.black, fontSize: 20.0),
-                                    ),
+                                style: TextStyle(color: Colors.black, fontSize: 20.0),
+                                      ),
+                              
                             ),
                   
                   SizedBox(

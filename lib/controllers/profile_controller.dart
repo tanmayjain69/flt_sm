@@ -3,15 +3,17 @@ import 'dart:convert';
 import 'package:fltsm/Models/profile_model.dart';
 import 'package:fltsm/services/profile.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get_storage/get_storage.dart';
+
 
 
 
 class ProfileController extends GetxController {
   
   var profiledetails = List<User>().obs;
+   
+  
   // var profiledetails;
-  var name; 
   
   @override
   void onInit(){
@@ -20,11 +22,9 @@ class ProfileController extends GetxController {
    
   }
 
-  void fetchDetails() async {
+  void fetchDetails() {
       // WidgetsFlutterBinding.ensureInitialized();
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    var name = preferences.getString('name');
-    
+    var name = GetStorage().read('name');
     ProfileService().getProfileInfo(name).then((val) async {
       await Future.delayed(Duration(seconds: 1));
       // print(val.data['msg']);

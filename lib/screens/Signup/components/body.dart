@@ -10,6 +10,7 @@ import 'package:fltsm/components/rounded_input_field.dart';
 import 'package:fltsm/components/rounded_password_field.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -20,7 +21,14 @@ class _BodyState extends State<Body> {
 
   var _formKey = GlobalKey<FormState>(); 
   var name,password,email,firstName,token;
-
+  void _email(value){
+      if(GetUtils.isEmail(value)){
+        email = value;
+      }
+      else{
+        email = null;
+      }
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -50,7 +58,8 @@ class _BodyState extends State<Body> {
               hintText: "Your Email",
               
               onChanged: (value) {
-                email = value;
+                  _email(value);
+              
               },
             ),
             RoundedPasswordField(
@@ -64,16 +73,27 @@ class _BodyState extends State<Body> {
               press: () {
                 if (_formKey.currentState.validate()){
                 AuthService().addUser(name, password, email).then((value){
-                
+
+                  if(email == null){
+                    Fluttertoast.showToast(msg: 
+                    "Enter Valid Email",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0
+                    );
+                  }
+                else{
                     Fluttertoast.showToast(msg: 
                     value.data['msg'],
                     toastLength: Toast.LENGTH_SHORT,
                     gravity: ToastGravity.BOTTOM,
-                    backgroundColor: Colors.green,
+                    backgroundColor: Colors.red,
                     textColor: Colors.white,
                     fontSize: 16.0
                     );
-                  
+                }
                 });
               }
               },

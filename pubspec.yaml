@@ -26,6 +26,7 @@ dependencies:
   circular_profile_avatar:
   shared_preferences:
   get_storage:
+  get_it:
   intl:
   email_validator:
   # The following adds the Cupertino Icons font to your application.

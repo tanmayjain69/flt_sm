@@ -4,6 +4,8 @@ import 'package:fltsm/screens/Welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fltsm/screens/HomeScreen/feed.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -27,8 +29,8 @@ class _HomePageState extends State<HomePage> {
   int currentPage = 0;
 
   Future logout(BuildContext context)async{
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    preferences.remove('name');
+    GetStorage().remove('name');
+    Get.reset();
     Navigator.push(context, 
     MaterialPageRoute(
                     builder: (context) {

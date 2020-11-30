@@ -3,6 +3,7 @@ import 'package:fltsm/screens/Login/components/background.dart';
 import 'package:fltsm/screens/Preferences/preference_page.dart';
 import 'package:fltsm/services/authenticate.dart';
 import 'package:fltsm/services/preference.dart';
+import 'package:fltsm/services/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:fltsm/Screens/Signup/signup_screen.dart';
 import 'package:fltsm/components/already_have_an_account_acheck.dart';
@@ -11,7 +12,8 @@ import 'package:fltsm/components/rounded_input_field.dart';
 import 'package:fltsm/components/rounded_password_field.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get_storage/get_storage.dart';
+
 
 class Body extends StatefulWidget {
   const Body({
@@ -23,7 +25,7 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  var name,password,token,resp_name;
+  var name,password,token, resp_name;
 
    List<String> reportList = [
     "Travel",
@@ -33,6 +35,67 @@ class _BodyState extends State<Body> {
   ];
 
   List<String> selectedReportList = List();
+
+  _authenticate(){
+    AuthService().login(name, password).then((val){
+                  if(val.data['success']){
+                    token = val.data['token'];
+                    AuthService().getinfo(token).then((val) async{
+                      if(val.data['success']){
+                        GetStorage().write('name',val.data['msg']);
+                        token = val.data['token'];
+                        Fluttertoast.showToast(msg: 
+                        val.data['msg'],
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        backgroundColor: Colors.green,
+                        textColor: Colors.white,
+                        fontSize: 16.0
+                        );
+                        //for going to homescreen
+                        // Navigator.pushNamed(
+                        //     context,
+                        //     HomePage.routeName,
+                            
+                        // );
+                        resp_name = val.data['msg'];
+                        
+                      }
+                    });  
+        
+                    ProfileService().addtoProfile(token).then((val) async{
+                      
+                      print(val);
+                          if(val.data['success']){
+                            Navigator.pushNamed(
+                            context,
+                            HomePage.routeName,
+                            
+                            );
+                            _showReportDialog();
+                          }
+                          else{
+                            Navigator.pushNamed(
+                            context,
+                            HomePage.routeName,
+                            
+                        );
+                          }
+                        });
+                  }
+                  else{
+                    Fluttertoast.showToast(msg: 
+                    'Invalid User',
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    backgroundColor: Colors.green,
+                    textColor: Colors.white,
+                    fontSize: 16.0
+                    );
+                  }
+                });
+    
+  }
 
   _showReportDialog() {
     showDialog(
@@ -95,53 +158,7 @@ class _BodyState extends State<Body> {
             RoundedButton(
               text: "LOGIN",
               press: () {
-                AuthService().login(name, password).then((val){
-                  if(val.data['success']){
-                    token = val.data['token'];
-
-                    Fluttertoast.showToast(msg: 
-                    'Authenticated',
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    backgroundColor: Colors.green,
-                    textColor: Colors.white,
-                    fontSize: 16.0
-                    );
-                    AuthService().getinfo(token).then((val) async{
-                      if(val.data['success']){
-                        SharedPreferences preferences = await SharedPreferences.getInstance();
-                        preferences.setString('name', val.data['msg']);
-                        token = val.data['token'];
-                        Fluttertoast.showToast(msg: 
-                        val.data['msg'],
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        backgroundColor: Colors.green,
-                        textColor: Colors.white,
-                        fontSize: 16.0
-                        );
-                        //for going to homescreen
-                        Navigator.pushNamed(
-                            context,
-                            HomePage.routeName,
-                            
-                        );
-                        resp_name = val.data['msg'];
-                        _showReportDialog();
-                      }
-                    });  
-                  }
-                  else{
-                    Fluttertoast.showToast(msg: 
-                    'Invalid User',
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    backgroundColor: Colors.green,
-                    textColor: Colors.white,
-                    fontSize: 16.0
-                    );
-                  }
-                });
+                _authenticate();
 
               },
             ),

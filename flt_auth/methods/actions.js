@@ -111,8 +111,8 @@ var functions  = {
                 Followers: req.body.Followers,
                 Posts: req.body.Posts,
                 Following: req.body.Following,
-                Skills: req.body.Skills
-               
+                Skills: req.body.Skills,
+                Communities: req.body.Communities
                });
                newUser.save(function(err,newUser){
                    if(err){

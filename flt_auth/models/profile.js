@@ -8,26 +8,32 @@ var profileSchema = new Schema({
         require: true,
         unique: true
     },
+
     LastName: {
         type: String,
         require: true,
+        default: " "
         
     
     },
 
     FirstName: {
         type: String,
-        require: false
+        require: false,
+        default: " "
     },
 
     Bio: {
         type: String,
-        
+        default: " "
     },
     
     
     Skills: {
-        typr: Array
+        type: Array
+    },
+    Communities: {
+        type: Array
     },
 
     Followers: {

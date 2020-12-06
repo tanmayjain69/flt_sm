@@ -31,9 +31,11 @@ class AuthService{
 
   }
 
-  addUser(name,password) async {
+  addUser(name,password,email) async {
     return await dio.post('http://192.168.1.13:3000/adduser',data: {
-     "name":name , "password":password
+     "name":name ,
+     "email":email,
+      "password":password
     }, options: Options (contentType: Headers.formUrlEncodedContentType)
     );
   }

@@ -1,28 +1,43 @@
-import 'package:fltsm/screens/loginscreen.dart';
-import 'package:flutter/material.dart';
+import 'package:fltsm/screens/HomeScreen/main_home.dart';
+import 'package:fltsm/screens/Preferences/preference_page.dart';
+import 'package:fltsm/screens/Welcome/welcome_screen.dart';
 
-void main() => runApp(MyApp());
+import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
+import 'constants.dart';
+Future<void> main() async {
+    await GetStorage.init();
+    runApp(MyApp());
+}
+
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    print(GetStorage().read('name'));
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'SAYYAH',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+    
+        // primarySwatch: Colors.blue,
+        primaryColor: kPrimaryColor,
       ),
-      home: LoginScreen(),
+      
+      initialRoute: '/',
+      routes: {
+    // When navigating to the "/" route, build the FirstScreen widget.
+
+      '/': (context) => GetStorage().hasData('name') ?  HomePage() : WelcomeScreen(),
+      // '/': (context) => ProfilePage(),
+    // When navigating to the "/second" route, build the SecondScreen widget.
+      
+    //Navigation with extract route
+      HomePage.routeName: (context) => HomePage(),
+      PreferencePage.routeName: (context) => PreferencePage(title: "Select Preferences")
+  },
+      // home: LoginScreen(),
     );
   }
 }

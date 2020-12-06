@@ -8,13 +8,14 @@ import 'package:get/get.dart';
 import 'dp_down_sort.dart';
 
 class AskComm extends StatefulWidget {
-  final querycontroller = Get.put(QueryController());
+  
   @override
   _AskCommState createState() => _AskCommState();
 }
 
 class _AskCommState extends State<AskComm> {
 
+final querycontroller = Get.put(QueryController());
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class _AskCommState extends State<AskComm> {
         builder: (controller) {
           return SingleChildScrollView(
           
-              child: Stack(
+              child: Column(
               children: <Widget>[
                 Container(
                                 

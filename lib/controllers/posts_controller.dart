@@ -3,7 +3,7 @@ import 'package:fltsm/services/posts.dart';
 import 'package:get/get.dart';
 
 class PostController extends GetxController{
-  var postDetails = List<Post>().obs;
+  var postDetails = List<dynamic>().obs;
 
   @override
   void onInit(){
@@ -21,14 +21,8 @@ class PostController extends GetxController{
       // print(val.data['msg']);
       
       var jsonResponse = val.data['msg'];
-      for(int i=0;i<jsonResponse.length;i++){
-      Post post =  Post.fromJson(jsonResponse[i]);
-      postDetails.add(post);
-      }
-      // print(querydetails);
-      // print(querypost);
-      // querydetails.value = l;
-      // print(querydetails[0].details);
+      postDetails.value = jsonResponse.map((v) => Post.fromJson(v)).toList();
+      print(postDetails);
     });
   }
 

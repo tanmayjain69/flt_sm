@@ -5,12 +5,14 @@ import 'package:get/get.dart';
 
 
 class QueryController extends GetxController{
-  var querydetails = List<QueryPost>().obs;
+  var querydetails = List<dynamic>().obs;
 
   @override
   void onInit(){
-    super.onInit();
+    print("Iam queryoninit");
     fetchDetails();
+    super.onInit();
+    
   }
 
   void fetchDetails() async {
@@ -23,14 +25,9 @@ class QueryController extends GetxController{
       // print(val.data['msg']);
       
       var jsonResponse = val.data['msg'];
-      for(int i=0;i<jsonResponse.length;i++){
-      QueryPost querypost =  QueryPost.fromJson(jsonResponse[i]);
-      querydetails.add(querypost);
-      }
-      // print(querydetails);
-      // print(querypost);
-      // querydetails.value = l;
-      // print(querydetails[0].details);
+      querydetails.value = jsonResponse.map((v) => QueryPost.fromJson(v)).toList();
+      print(querydetails);
+      
     });
   
   }
@@ -39,7 +36,6 @@ class QueryController extends GetxController{
       QueryService().addQuery(dat).then((val) async {
                         print(val.data);
     });
-
     fetchDetails();
   }
 

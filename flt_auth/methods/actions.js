@@ -33,7 +33,10 @@ var multer = require('multer')
 //     fileFilter: fileFilter
 
 // })
-
+/*
+Export Functions
+module.export.func_name  = async (req, res) => {}
+*/
 var functions  = {
     addNew: function(req,res){
         if((!req.body.name) || (!req.body.password) || (!req.body.email)){

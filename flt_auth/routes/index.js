@@ -5,6 +5,13 @@ const preference = require('../models/preference')
 const preference_action = require('../methods/preference_action')
 const query_actions = require('../methods/query_actions')
 const router = express.Router()
+
+/*
+import fucntions like this
+var { func_name, response_render_html, response_render_json } = require('../methods/actions');
+user like 
+router.post('/adduser',func_name)
+*/
 router.get('/',(req,res) => {
     res.send('WELCOME TO SAYYAH')
 })

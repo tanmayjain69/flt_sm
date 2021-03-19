@@ -10,7 +10,7 @@ class PreferenceService{
 
   addPreference(name,communities) async {
     try{
-    return await dio.post('http://192.168.1.13:3000/addPreference',data: {
+    return await dio.post('http://192.168.1.4:3000/addPreference',data: {
      "name":name ,
      "Communities":communities,
 

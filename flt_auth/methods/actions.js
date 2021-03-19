@@ -1,9 +1,8 @@
-var User = require('../models/user')
+var User = require("../models/user");
 var Profile = require('../models/profile')
 var jwt = require('jwt-simple')
 var config = require('../config/dbConfig')
 var multer = require('multer')
-
 
 // //Multer config
 // const storage = multer.diskStorage({

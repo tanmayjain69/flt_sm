@@ -11,7 +11,7 @@ class ProfileService{
      
      try{
        dio.options.headers['Authorization'] = 'Bearer $token';
-       return await dio.post('http://192.168.1.13:3000/addtoProfile');
+       return await dio.post('http://192.168.1.4:3000/addtoProfile');
 
      }
       on DioError catch(e){
@@ -34,7 +34,7 @@ class ProfileService{
     //   'name': name,
     // };
     // print(name);    
-    return await dio.get('http://192.168.1.13:3000/profileInfo', queryParameters: {
+    return await dio.get('http://192.168.1.4:3000/profileInfo', queryParameters: {
       "name": name
     });
     
@@ -57,7 +57,7 @@ class ProfileService{
   updateProfile(dat) async{
     try{
     var name = GetStorage().read('name');
-    return await dio.patch('http://192.168.1.13:3000/update/$name', data: dat);
+    return await dio.patch('http://192.168.1.4:3000/update/$name', data: dat);
     
     }
      on DioError catch(e){

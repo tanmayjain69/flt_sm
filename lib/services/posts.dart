@@ -8,7 +8,7 @@ class PostService{
 
   getAllPosts() async{
       try{
-        return await dio.get('http://192.168.1.13:3000/getAllPosts');
+        return await dio.get('http://192.168.1.4:3000/getAllPosts');
       }
 
       on DioError catch(e){

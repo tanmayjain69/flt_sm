@@ -7,7 +7,7 @@ class QueryService{
 
   addQuery(dat) async {
     try{    
-    return await dio.post('http://192.168.1.13:3000/addQuery', data: dat );
+    return await dio.post('http://192.168.1.4:3000/addQuery', data: dat );
     
     }
      on DioError catch(e){
@@ -31,7 +31,7 @@ class QueryService{
     //   'name': name,
     // };
     // print(name);    
-    return await dio.get('http://192.168.1.13:3000/getQuery');
+    return await dio.get('http://192.168.1.4:3000/getQuery');
     
     }
      on DioError catch(e){

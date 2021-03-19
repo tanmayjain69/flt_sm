@@ -9,7 +9,7 @@ class AuthService{
 
   login(name,password) async {
     try {
-      return await dio.post('http://192.168.1.13:3000/authenticate',data: {
+      return await dio.post('http://192.168.1.4:3000/authenticate',data: {
         "name": name,
         "password": password
 
@@ -32,7 +32,7 @@ class AuthService{
   }
 
   addUser(name,password,email) async {
-    return await dio.post('http://192.168.1.13:3000/adduser',data: {
+    return await dio.post('http://192.168.1.4:3000/adduser',data: {
      "name":name ,
      "email":email,
       "password":password
@@ -42,7 +42,7 @@ class AuthService{
 
   getinfo(token) async {
     dio.options.headers['Authorization'] = 'Bearer $token';
-    return await dio.get('http://192.168.1.13:3000/getinfo');
+    return await dio.get('http://192.168.1.4:3000/getinfo');
     
   }
 
